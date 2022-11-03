@@ -1,0 +1,12 @@
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.partySize {
+    font-weight: bold;
+}
+
+.number {
+    font-weight: normal;
+}

@@ -1,0 +1,53 @@
+:root {
+    --shadow: 10px 7px 10px rgb(223, 218, 218);
+    --border-radius: 0.1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+body {
+    background: rgb(251, 249, 249);
+}
+
+.restaurant {
+    background: rgb(255, 255, 255);
+
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.list,
+ul {
+    list-style-type: none;
+}
+
+ul {
+    padding-left: 0;
+}
+
+p {
+    margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 30rem) {
+    .list {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    ul {
+        margin-top: -1rem;
+
+        padding-left: 2rem;
+    }
+}

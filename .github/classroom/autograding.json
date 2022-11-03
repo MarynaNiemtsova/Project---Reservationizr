@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Server tests",
+      "setup": "npm install --prefix server",
+      "run": "npm test --prefix server",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 3,
+      "points": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+.main {
+    padding: 0.2rem;
+    margin-bottom: 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.singleRestaurant,
+ul {
+    list-style-type: none;
+}
+
+ul {
+    padding-left: 0;
+}
+
+p {
+    color: rgb(80, 77, 77);
+    margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 30rem) {
+    .singleRestaurant ul {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    ul {
+        margin-top: -1rem;
+
+        padding-left: 2rem;
+    }
+}

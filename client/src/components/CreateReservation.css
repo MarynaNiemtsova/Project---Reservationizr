@@ -1,0 +1,35 @@
+.newReserve,
+h2 {
+    text-align: left;
+}
+
+.partySize,
+.startDate {
+    margin-bottom: 0.8rem;
+}
+
+input {
+    width: 100%;
+    height: 2rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(217, 214, 214);
+}
+
+.submit-btn {
+    border: 2px solid transparent;
+    background: rgb(209, 46, 46);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.submit-btn:active,
+.submit-btn:hover {
+    border-color: rgb(209, 46, 46);
+    color: rgb(209, 46, 46);
+    background: #fff;
+}

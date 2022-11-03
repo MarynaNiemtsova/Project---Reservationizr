@@ -1,0 +1,16 @@
+.btn-login {
+  border: 2px solid transparent;
+  background: #1e0245;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-login:active,
+.btn-login:hover {
+  border-color: #1e0245;
+  color: #1e0245;
+  background: #fff;
+}

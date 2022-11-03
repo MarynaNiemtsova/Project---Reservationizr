@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  color: #2b2c34;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background: #ccc;
+  border-radius: 0.5rem;
+  display: inline-block;
+  color: #000;
+  padding: 0.5rem 1rem;
+  margin: 0 0 1rem;
+  text-decoration: none;
+}

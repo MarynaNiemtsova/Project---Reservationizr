@@ -1,0 +1,387 @@
+openapi: 3.0.0
+info:
+  title: Reservationizr API
+  version: "1.0"
+  description: Reserve a table at your favourite restaurant
+  contact:
+    name: Developers Institute
+    email: info@developersinstitute.ac.nz
+servers:
+  - url: "http://localhost:5001"
+    description: Development
+paths:
+  /restaurants:
+    get:
+      summary: Get all restaurants
+      tags: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Restaurant"
+              examples:
+                Restaurant list example:
+                  value:
+                    - id: 616005cae3c8e880c13dc0b9
+                      name: Curry Place
+                      description: Bringing you the spirits of India in the form of best authentic grandma’s recipe dishes handcrafted with love by our chefs!
+                      image: "https://placekitten.com/500/500"
+      operationId: get-restaurants
+      description: Get a list of available restaurants
+  /reservations:
+    get:
+      summary: Get all reservations
+      tags: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reservation"
+              examples:
+                Reservations:
+                  value:
+                    - id: 507f1f77bcf86cd799439011
+                      partySize: 4
+                      date: "2023-11-17T06:30:00.000Z"
+                      userId: 614abe145f317b89a2e36883
+                      restaurantName: Island Grill
+        "401":
+          description: The user is not authenticated
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                example:
+                  value: "UnauthorizedError: Unauthorized"
+      operationId: get-reservations
+      parameters: []
+      security:
+        - Auth0: []
+      description: Get all reservations
+    post:
+      summary: Create a reservation
+      operationId: post-reservations
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+              examples:
+                Example:
+                  value:
+                    id: 507f1f77bcf86cd799439011
+                    partySize: 4
+                    date: "2023-11-17T06:30:00.000Z"
+                    userId: 614abe145f317b89a2e36883
+                    restaurantName: Island Grill
+        "400":
+          description: The client has provided an invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Validation-error"
+              examples:
+                example:
+                  value:
+                    statusCode: 400
+                    error: Bad Request
+                    message: Validation failed
+                    validation:
+                      body:
+                        source: body
+                        keys:
+                          - partySize
+                        message: '"partySize" must be greater than or equal to 1'
+        "401":
+          description: The user is not authenticated
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                example:
+                  value: "UnauthorizedError: Unauthorized"
+      security:
+        - Auth0: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ""
+              type: object
+              properties:
+                partySize:
+                  type: number
+                date:
+                  type: string
+                  minLength: 1
+                restaurantName:
+                  type: string
+                  minLength: 1
+              required:
+                - partySize
+                - date
+                - restaurantName
+              x-examples:
+                example-1:
+                  partySize: 4
+                  date: "2023-11-17T06:30:00.000Z"
+                  restaurantName: Island Grill
+            examples:
+              Reservation request body example:
+                value:
+                  partySize: 4
+                  date: "2023-11-17T06:30:00.000Z"
+                  restaurantName: Island Grill
+        description: ""
+      description: Create a single reservation
+  "/reservations/{reservationId}":
+    parameters:
+      - schema:
+          type: string
+        name: reservationId
+        in: path
+        required: true
+        description: The id of the reservation to retrieve
+    get:
+      summary: Get a single reservation
+      tags: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+              examples:
+                example:
+                  value:
+                    id: 507f1f77bcf86cd799439011
+                    partySize: 4
+                    date: "2023-11-17T06:30:00.000Z"
+                    userId: 614abe145f317b89a2e36883
+                    restaurantName: Island Grill
+        "400":
+          description: Invalid ID is provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                example:
+                  value:
+                    error: invalid id provided
+        "401":
+          description: The user is not authenticated
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                example:
+                  value: "UnauthorizedError: Unauthorized"
+        "403":
+          description: The user is trying to access a reservation they did not create
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                example:
+                  value:
+                    error: user does not have permission to access this reservation
+        "404":
+          description: The reservation trying to be retrieved does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                example:
+                  value:
+                    error: not found
+      operationId: get-reservations-reservationId
+      description: Get a single reservation
+      security:
+        - Auth0: []
+  "/restaurants/{restaurantId}":
+    parameters:
+      - schema:
+          type: string
+        name: restaurantId
+        in: path
+        required: true
+        description: The id of the restaurant to retrieve
+    get:
+      summary: Get a single restaurant
+      tags: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Restaurant"
+        "400":
+          description: Invalid ID is provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                example:
+                  value:
+                    error: invalid id provided
+        "404":
+          description: The restaurant trying to be retrieved does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                example:
+                  value:
+                    error: restaurant not found
+      operationId: get-restaurants-restaurantId
+      description: Get a single restaurant
+components:
+  schemas:
+    Restaurant:
+      description: ""
+      type: object
+      x-examples:
+        Restaurant:
+          id: 616005cae3c8e880c13dc0b9
+          name: Curry Place
+          description: Bringing you the spirits of India in the form of best authentic grandma’s recipe dishes handcrafted with love by our chefs!
+          image: "https://placekitten.com/500/500"
+      properties:
+        id:
+          type: string
+          example: 616005cae3c8e880c13dc0b9
+        name:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        image:
+          type: string
+          minLength: 1
+      required:
+        - id
+        - name
+        - description
+        - image
+    Reservation:
+      description: ""
+      type: object
+      x-examples:
+        Reservation:
+          id: 507f1f77bcf86cd799439011
+          partySize: 4
+          date: "2023-11-17T06:30:00.000Z"
+          userId: 614abe145f317b89a2e36883
+          restaurantName: Island Grill
+      properties:
+        id:
+          type: string
+          minLength: 1
+        partySize:
+          type: number
+        date:
+          type: string
+          minLength: 1
+        userId:
+          type: string
+          minLength: 1
+          description: The id of the user that made this reservation
+        restaurantName:
+          type: string
+          minLength: 1
+      required:
+        - id
+        - partySize
+        - date
+        - userId
+        - restaurantName
+    Error:
+      description: Error response body
+      type: object
+      properties:
+        error:
+          type: string
+          minLength: 1
+      required:
+        - error
+      x-examples:
+        example:
+          error: not found
+      title: ""
+    Validation-error:
+      description: ""
+      type: object
+      properties:
+        statusCode:
+          type: number
+        error:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+        validation:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                source:
+                  type: string
+                  minLength: 1
+                keys:
+                  type: array
+                  items:
+                    properties: {}
+                message:
+                  type: string
+                  minLength: 1
+              required:
+                - source
+                - keys
+                - message
+          required:
+            - body
+      required:
+        - statusCode
+        - error
+        - message
+        - validation
+      x-examples:
+        example:
+          statusCode: 400
+          error: Bad Request
+          message: Validation failed
+          validation:
+            body:
+              source: body
+              keys:
+                - partySize
+              message: '"partySize" must be greater than or equal to 1'
+  securitySchemes:
+    Auth0:
+      type: oauth2
+      flows: {}
+      description: ""
+  responses: {}
