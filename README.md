@@ -1,13 +1,5 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8236137&assignment_repo_type=AssignmentRepo)
-# 02 Project - Reservationizr Application - Manage Reservations
-
-## Assessment details
-
-- [Level 5 Learning Outcomes](./docs/learning-outcomes-l5.md)
-- [Level 6 Learning Outcomes](./docs/learning-outcomes-l6.md)
-
----
-
+# Project - Reservationizr Application - Manage Reservations
+https://reservation-restaurants.onrender.com
 # Scenario
 
 You are working for a new startup, Reservationizr. It allows customers to make reservations at any of their local restaurants from one place.
@@ -34,19 +26,6 @@ The `client` folder contains the React Application, and the `server` folder cont
 - Type `npm install` to install npm dependencies
 - Type `npm start` to start the Express Server
 
-## MongoDB Database
-
-- Start MongoDB in Docker by opening a terminal and `copy & paste` in the following:
-
-```shell
-docker run --name 02-project-reservationizr-application-part-2-mongo_db \
-  -p 27017:27017 \
-  -v 02-exercise-auth0-express-react-mongo_db_data_container:/data/db \
-  -d \
-  mongo
-```
-
-- Connect to MongoDB using [MongoDB Compass](https://www.mongodb.com/products/compass). Create a database named `mongo`, a collection named `restaurants`, and load data from the [data](./data) folder into the database.
 
 ## Understand what already exists
 
@@ -241,9 +220,3 @@ Watch the [video tutorial](https://www.loom.com/share/dfaf8b47c6924f5ba04ce84dd1
 - The website domain is added to [`website-domain.txt`](website-domain.txt)
 
 ---
-
-# Submit your Project
-
-- [ ] Commits are pushed to GitHub
-- [ ] Automated tests pass in GitHub
-- [ ] project is submitted in Google Classroom
